@@ -15,5 +15,4 @@ def inflation_view(request):
                 context['header'] = row
             else:
                 context['data'].append(row)
-        print(context)
     return render(request, template_name, context)
