@@ -1,0 +1,53 @@
+<!DOCTYPE html>{% load static %}
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Инфляция в России</title>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
+
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  </head>
+
+  <body>
+    {% block content %}
+      <div class="row">
+        <h1 class="col s12">Инфляция в России</h1>
+        <div class="col s12 m8">
+        <table>
+          <tr>
+            {% for col in header %}
+              <th>{{ col }}</th>
+            {% endfor %}
+          </tr>
+          {% for row in data %}
+            <tr>
+              {% for col in row %}
+                <td style="background-color:
+                {% if col and not forloop.first and not forloop.last and col < '0' %}
+                  green
+                {% elif not forloop.first and not forloop.last and col > '1' and col < '2' %}
+                  rgb(255, 181, 181);
+                {% elif not forloop.first and not forloop.last and col >= '2' and col < '5' %}
+                  rgb(255, 90, 90);
+                {% elif not forloop.first and not forloop.last and col >= '5' %}
+                  rgb(255, 0, 0);
+                {% elif forloop.last %}
+                  grey
+                {% endif %}">
+                  {{ col|default:"-" }}
+                </td>
+              {% endfor %}
+            </tr>
+          {% endfor %}
+        </table>
+
+        </div>
+      </div>
+    {% endblock %}
+
+  </body>
+</html>
