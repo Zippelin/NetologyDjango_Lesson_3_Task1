@@ -1,4 +1,6 @@
-<!DOCTYPE html>{% load static %}
+{% load css_filter %}
+{% load static %}
+<!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8">
@@ -26,19 +28,8 @@
           {% for row in data %}
             <tr>
               {% for col in row %}
-                <td style="background-color:
-                {% if col and not forloop.first and not forloop.last and col < '0' %}
-                  green
-                {% elif not forloop.first and not forloop.last and col > '1' and col < '2' %}
-                  rgb(255, 181, 181);
-                {% elif not forloop.first and not forloop.last and col >= '2' and col < '5' %}
-                  rgb(255, 90, 90);
-                {% elif not forloop.first and not forloop.last and col >= '5' %}
-                  rgb(255, 0, 0);
-                {% elif forloop.last %}
-                  grey
-                {% endif %}">
-                  {{ col|default:"-" }}
+                <td style="background-color:{% set_css_color col forloop.first forloop.last %}">
+                  {{ col }}
                 </td>
               {% endfor %}
             </tr>
